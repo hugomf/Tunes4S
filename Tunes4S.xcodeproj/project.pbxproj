@@ -1,0 +1,388 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9A981E47289CE22C00D79AFC /* RowViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A981E46289CE22C00D79AFC /* RowViewer.swift */; };
+		9AD76C092897811300AD547B /* Tunes4SApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD76C082897811300AD547B /* Tunes4SApp.swift */; };
+		9AD76C0B2897811300AD547B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD76C0A2897811300AD547B /* ContentView.swift */; };
+		9AD76C0D2897811400AD547B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AD76C0C2897811400AD547B /* Assets.xcassets */; };
+		9AD76C102897811400AD547B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AD76C0F2897811400AD547B /* Preview Assets.xcassets */; };
+		9AD76C192897941700AD547B /* ID3TagEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 9AD76C182897941700AD547B /* ID3TagEditor */; };
+		9AD76C1B28980CE700AD547B /* SongListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD76C1A28980CE700AD547B /* SongListView.swift */; };
+		9AD76C1D28980D1C00AD547B /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD76C1C28980D1C00AD547B /* Helper.swift */; };
+		9AD76C1F28980E8D00AD547B /* ImportFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD76C1E28980E8D00AD547B /* ImportFolderView.swift */; };
+		9AD76C21289814F900AD547B /* LeftNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD76C20289814F900AD547B /* LeftNavigationView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9A981E46289CE22C00D79AFC /* RowViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowViewer.swift; sourceTree = "<group>"; };
+		9AD76C052897811300AD547B /* Tunes4S.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tunes4S.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AD76C082897811300AD547B /* Tunes4SApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tunes4SApp.swift; sourceTree = "<group>"; };
+		9AD76C0A2897811300AD547B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9AD76C0C2897811400AD547B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9AD76C0F2897811400AD547B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		9AD76C112897811400AD547B /* Tunes4S.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tunes4S.entitlements; sourceTree = "<group>"; };
+		9AD76C1A28980CE700AD547B /* SongListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongListView.swift; sourceTree = "<group>"; };
+		9AD76C1C28980D1C00AD547B /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		9AD76C1E28980E8D00AD547B /* ImportFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFolderView.swift; sourceTree = "<group>"; };
+		9AD76C20289814F900AD547B /* LeftNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftNavigationView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9AD76C022897811300AD547B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AD76C192897941700AD547B /* ID3TagEditor in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9AD76BFC2897811300AD547B = {
+			isa = PBXGroup;
+			children = (
+				9AD76C072897811300AD547B /* Tunes4S */,
+				9AD76C062897811300AD547B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9AD76C062897811300AD547B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9AD76C052897811300AD547B /* Tunes4S.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9AD76C072897811300AD547B /* Tunes4S */ = {
+			isa = PBXGroup;
+			children = (
+				9AD76C082897811300AD547B /* Tunes4SApp.swift */,
+				9AD76C0A2897811300AD547B /* ContentView.swift */,
+				9AD76C0C2897811400AD547B /* Assets.xcassets */,
+				9AD76C112897811400AD547B /* Tunes4S.entitlements */,
+				9AD76C0E2897811400AD547B /* Preview Content */,
+				9AD76C1A28980CE700AD547B /* SongListView.swift */,
+				9AD76C1C28980D1C00AD547B /* Helper.swift */,
+				9AD76C1E28980E8D00AD547B /* ImportFolderView.swift */,
+				9AD76C20289814F900AD547B /* LeftNavigationView.swift */,
+				9A981E46289CE22C00D79AFC /* RowViewer.swift */,
+			);
+			path = Tunes4S;
+			sourceTree = "<group>";
+		};
+		9AD76C0E2897811400AD547B /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				9AD76C0F2897811400AD547B /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9AD76C042897811300AD547B /* Tunes4S */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9AD76C142897811400AD547B /* Build configuration list for PBXNativeTarget "Tunes4S" */;
+			buildPhases = (
+				9AD76C012897811300AD547B /* Sources */,
+				9AD76C022897811300AD547B /* Frameworks */,
+				9AD76C032897811300AD547B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tunes4S;
+			packageProductDependencies = (
+				9AD76C182897941700AD547B /* ID3TagEditor */,
+			);
+			productName = Tunes4S;
+			productReference = 9AD76C052897811300AD547B /* Tunes4S.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9AD76BFD2897811300AD547B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					9AD76C042897811300AD547B = {
+						CreatedOnToolsVersion = 14.0;
+					};
+				};
+			};
+			buildConfigurationList = 9AD76C002897811300AD547B /* Build configuration list for PBXProject "Tunes4S" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9AD76BFC2897811300AD547B;
+			packageReferences = (
+				9AD76C172897941700AD547B /* XCRemoteSwiftPackageReference "ID3TagEditor" */,
+			);
+			productRefGroup = 9AD76C062897811300AD547B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9AD76C042897811300AD547B /* Tunes4S */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9AD76C032897811300AD547B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AD76C102897811400AD547B /* Preview Assets.xcassets in Resources */,
+				9AD76C0D2897811400AD547B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9AD76C012897811300AD547B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AD76C0B2897811300AD547B /* ContentView.swift in Sources */,
+				9AD76C1F28980E8D00AD547B /* ImportFolderView.swift in Sources */,
+				9AD76C1B28980CE700AD547B /* SongListView.swift in Sources */,
+				9AD76C092897811300AD547B /* Tunes4SApp.swift in Sources */,
+				9AD76C21289814F900AD547B /* LeftNavigationView.swift in Sources */,
+				9AD76C1D28980D1C00AD547B /* Helper.swift in Sources */,
+				9A981E47289CE22C00D79AFC /* RowViewer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		9AD76C122897811400AD547B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9AD76C132897811400AD547B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		9AD76C152897811400AD547B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Tunes4S/Tunes4S.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Tunes4S/Preview Content\"";
+				DEVELOPMENT_TEAM = PPM828F998;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = aztekcoders.Tunes4S;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		9AD76C162897811400AD547B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Tunes4S/Tunes4S.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Tunes4S/Preview Content\"";
+				DEVELOPMENT_TEAM = PPM828F998;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = aztekcoders.Tunes4S;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9AD76C002897811300AD547B /* Build configuration list for PBXProject "Tunes4S" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AD76C122897811400AD547B /* Debug */,
+				9AD76C132897811400AD547B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9AD76C142897811400AD547B /* Build configuration list for PBXNativeTarget "Tunes4S" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AD76C152897811400AD547B /* Debug */,
+				9AD76C162897811400AD547B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9AD76C172897941700AD547B /* XCRemoteSwiftPackageReference "ID3TagEditor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/chicio/ID3TagEditor.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9AD76C182897941700AD547B /* ID3TagEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9AD76C172897941700AD547B /* XCRemoteSwiftPackageReference "ID3TagEditor" */;
+			productName = ID3TagEditor;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 9AD76BFD2897811300AD547B /* Project object */;
+}
