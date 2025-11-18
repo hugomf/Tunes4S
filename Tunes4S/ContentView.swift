@@ -21,16 +21,22 @@ struct WinampPlayerView: View {
     @State private var searchText = ""
     @State private var currentSong: Song?
     @State private var isPlaying = false
-    @State private var audioPlayer: AVAudioPlayer?
+    @StateObject private var audioService = AudioService()
     @State private var showPlaylist = false
+    @State private var gains: [Float] = Array(repeating: 0, count: 10)
 
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
                 HeaderView(showPlaylist: $showPlaylist)
                 DisplayView(currentSong: $currentSong)
-                ControlsView(isPlaying: $isPlaying, togglePlay: togglePlay)
-                EqualizerView()
+                ControlsView(isPlaying: $isPlaying, togglePlay: togglePlay, playNext: playNextSong, playPrevious: playPreviousSong)
+                EqualizerView(gains: $gains)
+                    .onChange(of: gains) { newGains in
+                        for i in 0..<newGains.count {
+                            audioService.setGain(newGains[i], forBandAt: i)
+                        }
+                    }
                 FooterView(importFolder: importFolder)
             }
             .frame(width: 350, height: 500)
@@ -39,13 +45,16 @@ struct WinampPlayerView: View {
             .shadow(radius: 10)
 
             if showPlaylist {
-                PlaylistView(songs: $songs, currentSong: $currentSong)
+                PlaylistView(songs: $songs, currentSong: $currentSong, showPlaylist: $showPlaylist)
                     .frame(width: 350, height: 500)
                     .background(Color(hex: "2c2c2c"))
                     .cornerRadius(10)
                     .shadow(radius: 10)
                     .transition(.move(edge: .bottom))
             }
+        }
+        .onChange(of: currentSong) { _ in
+            playSong()
         }
     }
 
@@ -104,11 +113,31 @@ struct WinampPlayerView: View {
 
         if isPlaying {
             guard let song = currentSong else { return }
-            let url = URL(fileURLWithPath: song.file)
-            audioPlayer = try! AVAudioPlayer(contentsOf: url)
-            audioPlayer?.play()
+            audioService.play(song: song)
         } else {
-            audioPlayer?.stop()
+            audioService.stop()
+        }
+    }
+
+    func playNextSong() {
+        guard let currentSong = currentSong, let currentIndex = songs.firstIndex(of: currentSong) else { return }
+        let nextIndex = (currentIndex + 1) % songs.count
+        self.currentSong = songs[nextIndex]
+        playSong()
+    }
+
+    func playPreviousSong() {
+        guard let currentSong = currentSong, let currentIndex = songs.firstIndex(of: currentSong) else { return }
+        let previousIndex = (currentIndex - 1 + songs.count) % songs.count
+        self.currentSong = songs[previousIndex]
+        playSong()
+    }
+
+    private func playSong() {
+        if isPlaying {
+            audioService.stop()
+            guard let song = currentSong else { return }
+            audioService.play(song: song)
         }
     }
 }
@@ -156,16 +185,18 @@ struct DisplayView: View {
 struct ControlsView: View {
     @Binding var isPlaying: Bool
     var togglePlay: () -> Void
+    var playNext: () -> Void
+    var playPrevious: () -> Void
 
     var body: some View {
         HStack {
-            Button(action: {}) {
+            Button(action: playPrevious) {
                 Image(systemName: "backward.fill")
             }
             Button(action: togglePlay) {
                 Image(systemName: isPlaying ? "pause.fill" : "play.fill")
             }
-            Button(action: {}) {
+            Button(action: playNext) {
                 Image(systemName: "forward.fill")
             }
         }
@@ -176,20 +207,36 @@ struct ControlsView: View {
 }
 
 struct EqualizerView: View {
+    @Binding var gains: [Float]
+    let frequencies: [String] = ["32", "64", "125", "250", "500", "1K", "2K", "4K", "8K", "16K"]
+
     var body: some View {
-        ZStack {
-            Color(hex: "1c1c1c")
-            Text("Equalizer (placeholder)")
-                .foregroundColor(Color(hex: "ffcc00"))
+        VStack {
+            Text("Equalizer").foregroundColor(Color(hex: "ffcc00"))
+            HStack(spacing: 15) {
+                ForEach(0..<gains.count, id: \.self) { index in
+                    VStack(spacing: 5) {
+                        Slider(value: $gains[index], in: -12...12, step: 0.1)
+                            .rotationEffect(.degrees(-90))
+                            .frame(width: 80)
+                        Text(frequencies[index])
+                            .foregroundColor(Color(hex: "cccccc"))
+                            .font(.caption)
+                    }
+                }
+            }
+            .padding(.horizontal)
         }
-        .frame(height: 100)
+        .padding(.vertical, 10)
+        .background(Color(hex: "1c1c1c"))
+        .frame(height: 150)
     }
 }
 
 struct PlaylistView: View {
     @Binding var songs: [Song]
     @Binding var currentSong: Song?
-    @Environment(\.presentationMode) var presentationMode
+    @Binding var showPlaylist: Bool
 
     var body: some View {
         VStack {
@@ -200,7 +247,9 @@ struct PlaylistView: View {
                     .foregroundColor(Color(hex: "ffcc00"))
                 Spacer()
                 Button(action: {
-                    presentationMode.wrappedValue.dismiss()
+                    withAnimation {
+                        showPlaylist = false
+                    }
                 }) {
                     Image(systemName: "xmark")
                         .foregroundColor(Color(hex: "ffcc00"))

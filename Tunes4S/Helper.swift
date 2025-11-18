@@ -16,10 +16,6 @@ struct Song: Identifiable, Hashable {
     var songImage: AttachedPicture?
 }
 
-struct Option: Hashable {
-    var title: String
-    var imageName: String
-}
 
 extension Color {
     init(hex: String) {
