@@ -7,13 +7,27 @@
 
 import Foundation
 import SwiftUI
+import ID3TagEditor
 
-struct Song: Identifiable, Hashable {
+struct Song: Identifiable {
     var id: Int
     var title: String
     var album: String
     var file: String
     var songImage: AttachedPicture?
+}
+
+extension Song: Hashable {
+    static func == (lhs: Song, rhs: Song) -> Bool {
+        lhs.id == rhs.id && lhs.title == rhs.title && lhs.album == rhs.album && lhs.file == rhs.file
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(title)
+        hasher.combine(album)
+        hasher.combine(file)
+    }
 }
 
 

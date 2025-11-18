@@ -21,7 +21,7 @@ struct WinampPlayerView: View {
     @State private var searchText = ""
     @State private var currentSong: Song?
     @State private var isPlaying = false
-    @StateObject private var audioService = AudioService()
+    // @StateObject private var audioService = AudioService()
     @State private var showPlaylist = false
     @State private var gains: [Float] = Array(repeating: 0, count: 10)
 
@@ -32,11 +32,11 @@ struct WinampPlayerView: View {
                 DisplayView(currentSong: $currentSong)
                 ControlsView(isPlaying: $isPlaying, togglePlay: togglePlay, playNext: playNextSong, playPrevious: playPreviousSong)
                 EqualizerView(gains: $gains)
-                    .onChange(of: gains) { newGains in
-                        for i in 0..<newGains.count {
-                            audioService.setGain(newGains[i], forBandAt: i)
-                        }
-                    }
+                    // .onChange(of: gains) { newGains in
+                    //     for i in 0..<newGains.count {
+                    //         audioService.setGain(newGains[i], forBandAt: i)
+                    //     }
+                    // }
                 FooterView(importFolder: importFolder)
             }
             .frame(width: 350, height: 500)
@@ -53,9 +53,9 @@ struct WinampPlayerView: View {
                     .transition(.move(edge: .bottom))
             }
         }
-        .onChange(of: currentSong) { _ in
-            playSong()
-        }
+        // .onChange(of: currentSong) { _ in
+        //     playSong()
+        // }
     }
 
     func importFolder() {
@@ -111,35 +111,35 @@ struct WinampPlayerView: View {
     func togglePlay() {
         isPlaying.toggle()
 
-        if isPlaying {
-            guard let song = currentSong else { return }
-            audioService.play(song: song)
-        } else {
-            audioService.stop()
-        }
+        // if isPlaying {
+        //     guard let song = currentSong else { return }
+        //     audioService.play(song: song)
+        // } else {
+        //     audioService.stop()
+        // }
     }
 
     func playNextSong() {
         guard let currentSong = currentSong, let currentIndex = songs.firstIndex(of: currentSong) else { return }
         let nextIndex = (currentIndex + 1) % songs.count
         self.currentSong = songs[nextIndex]
-        playSong()
+        // playSong()
     }
 
     func playPreviousSong() {
         guard let currentSong = currentSong, let currentIndex = songs.firstIndex(of: currentSong) else { return }
         let previousIndex = (currentIndex - 1 + songs.count) % songs.count
         self.currentSong = songs[previousIndex]
-        playSong()
+        // playSong()
     }
 
-    private func playSong() {
-        if isPlaying {
-            audioService.stop()
-            guard let song = currentSong else { return }
-            audioService.play(song: song)
-        }
-    }
+    // private func playSong() {
+    //     if isPlaying {
+    //         audioService.stop()
+    //         guard let song = currentSong else { return }
+    //         audioService.play(song: song)
+    //     }
+    // }
 }
 
 struct HeaderView: View {
