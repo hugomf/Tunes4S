@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+struct Option: Hashable {
+    let title: String
+    let imageName: String
+}
 
 struct LeftNavigationView: View {
 
