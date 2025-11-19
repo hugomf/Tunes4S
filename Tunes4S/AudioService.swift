@@ -7,12 +7,11 @@
 
 import Foundation
 import AVFoundation
-import Combine
 
 class AudioService: ObservableObject {
     private var engine = AVAudioEngine()
     private var playerNode = AVAudioPlayerNode()
-    private var eqNode: AVAudioNode? // optional to handle possible API changes
+    private var eqNode = AVAudioUnitEQ(numberOfBands: 10)
 
     private let frequencies: [Float] = [32, 64, 125, 250, 500, 1000, 2000, 4000, 8000, 16000]
 
@@ -21,19 +20,17 @@ class AudioService: ObservableObject {
     }
 
     private func setupAudioEngine() {
-        eqNode = AVAudioUnitEQ(numberOfBands: 10)
-        guard let eq = eqNode as? AVAudioUnitEQ else { return }
         engine.attach(playerNode)
-        engine.attach(eq)
+        engine.attach(eqNode)
 
-        for i in 0..<eq.bands.count {
-            eq.bands[i].frequency = frequencies[i]
-            eq.bands[i].bypass = false
-            eq.bands[i].filterType = .parametric
+        for i in 0..<eqNode.bands.count {
+            eqNode.bands[i].frequency = frequencies[i]
+            eqNode.bands[i].bypass = false
+            eqNode.bands[i].filterType = .parametric
         }
 
-        engine.connect(playerNode, to: eq, format: nil)
-        engine.connect(eq, to: engine.mainMixerNode, format: nil)
+        engine.connect(playerNode, to: eqNode, format: nil)
+        engine.connect(eqNode, to: engine.mainMixerNode, format: nil)
 
         do {
             try engine.start()
@@ -59,8 +56,6 @@ class AudioService: ObservableObject {
     }
 
     func setGain(_ gain: Float, forBandAt index: Int) {
-        if let eq = eqNode as? AVAudioUnitEQ, index < eq.bands.count {
-            eq.bands[index].gain = gain
-        }
+        eqNode.bands[index].gain = gain
     }
 }

@@ -21,7 +21,7 @@ struct WinampPlayerView: View {
     @State private var searchText = ""
     @State private var currentSong: Song?
     @State private var isPlaying = false
-    // @StateObject private var audioService = AudioService()
+    @StateObject private var audioService = AudioService()
     @State private var showPlaylist = false
     @State private var gains: [Float] = Array(repeating: 0, count: 10)
 
@@ -32,11 +32,11 @@ struct WinampPlayerView: View {
                 DisplayView(currentSong: $currentSong)
                 ControlsView(isPlaying: $isPlaying, togglePlay: togglePlay, playNext: playNextSong, playPrevious: playPreviousSong)
                 EqualizerView(gains: $gains)
-                    // .onChange(of: gains) { newGains in
-                    //     for i in 0..<newGains.count {
-                    //         audioService.setGain(newGains[i], forBandAt: i)
-                    //     }
-                    // }
+                    .onChange(of: gains) { newGains in
+                        for i in 0..<newGains.count {
+                            audioService.setGain(newGains[i], forBandAt: i)
+                        }
+                    }
                 FooterView(importFolder: importFolder)
             }
             .frame(width: 350, height: 500)
@@ -45,7 +45,7 @@ struct WinampPlayerView: View {
             .shadow(radius: 10)
 
             if showPlaylist {
-                PlaylistView(songs: $songs, currentSong: $currentSong, showPlaylist: $showPlaylist)
+                PlaylistView(songs: $songs, currentSong: $currentSong, showPlaylist: $showPlaylist, isPlaying: $isPlaying)
                     .frame(width: 350, height: 500)
                     .background(Color(hex: "2c2c2c"))
                     .cornerRadius(10)
@@ -53,9 +53,9 @@ struct WinampPlayerView: View {
                     .transition(.move(edge: .bottom))
             }
         }
-        // .onChange(of: currentSong) { _ in
-        //     playSong()
-        // }
+        .onChange(of: currentSong) { _ in
+            playSong()
+        }
     }
 
     func importFolder() {
@@ -65,21 +65,23 @@ struct WinampPlayerView: View {
         panel.canChooseFiles = false
 
         if panel.runModal() == .OK {
+            guard let url = panel.url else { return }
             let fm = FileManager.default
-            let path = panel.url?.path ?? ""
+            
+            songs.removeAll()
 
-            do {
-                let items = try fm.contentsOfDirectory(atPath: path)
-
-                for item in items {
-                    if item.hasSuffix("mp3") {
-                        if let song = readMp3(path: path + "/" + item, id: songs.count) {
+            if let enumerator = fm.enumerator(at: url, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
+                for case let fileURL as URL in enumerator {
+                    if fileURL.pathExtension.lowercased() == "mp3" {
+                        if let song = readMp3(path: fileURL.path, id: songs.count) {
                             songs.append(song)
                         }
                     }
                 }
-            } catch {
-                print("Error reading directory")
+            }
+
+            if !songs.isEmpty {
+                currentSong = songs[0]
             }
         }
     }
@@ -111,35 +113,35 @@ struct WinampPlayerView: View {
     func togglePlay() {
         isPlaying.toggle()
 
-        // if isPlaying {
-        //     guard let song = currentSong else { return }
-        //     audioService.play(song: song)
-        // } else {
-        //     audioService.stop()
-        // }
+        if isPlaying {
+            guard let song = currentSong else { return }
+            audioService.play(song: song)
+        } else {
+            audioService.stop()
+        }
     }
 
     func playNextSong() {
         guard let currentSong = currentSong, let currentIndex = songs.firstIndex(of: currentSong) else { return }
         let nextIndex = (currentIndex + 1) % songs.count
         self.currentSong = songs[nextIndex]
-        // playSong()
+        playSong()
     }
 
     func playPreviousSong() {
         guard let currentSong = currentSong, let currentIndex = songs.firstIndex(of: currentSong) else { return }
         let previousIndex = (currentIndex - 1 + songs.count) % songs.count
         self.currentSong = songs[previousIndex]
-        // playSong()
+        playSong()
     }
 
-    // private func playSong() {
-    //     if isPlaying {
-    //         audioService.stop()
-    //         guard let song = currentSong else { return }
-    //         audioService.play(song: song)
-    //     }
-    // }
+    private func playSong() {
+        if isPlaying {
+            audioService.stop()
+            guard let song = currentSong else { return }
+            audioService.play(song: song)
+        }
+    }
 }
 
 struct HeaderView: View {
@@ -237,6 +239,7 @@ struct PlaylistView: View {
     @Binding var songs: [Song]
     @Binding var currentSong: Song?
     @Binding var showPlaylist: Bool
+    @Binding var isPlaying: Bool
 
     var body: some View {
         VStack {
@@ -263,6 +266,7 @@ struct PlaylistView: View {
                     .foregroundColor(currentSong?.id == song.id ? Color(hex: "ffcc00") : Color(hex: "cccccc"))
                     .onTapGesture {
                         currentSong = song
+                        isPlaying = true
                     }
             }
             .background(Color(hex: "1c1c1c"))
