@@ -67,7 +67,7 @@ struct ImportFolderView: View {
                 
                 let title = tagContentReader.title() ?? ""
                 let album = tagContentReader.album() ?? ""
-                let songImage = tagContentReader.attachedPictures()[0]
+                let songImage = tagContentReader.attachedPictures()[0] as? ID3FrameAttachedPicture
             
                 print(title)
                 //print(tagContentReader.artist() ?? "")

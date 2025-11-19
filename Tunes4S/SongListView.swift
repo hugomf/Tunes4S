@@ -22,7 +22,7 @@ struct SongListView: View {
     
     var body: some View {
         
-        List(songs, id: \.self) { item in
+        List(songs) { item in
             RowViewer(item: item)
         }
 
