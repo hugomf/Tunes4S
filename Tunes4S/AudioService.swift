@@ -29,8 +29,9 @@ class AudioService: ObservableObject {
             eqNode.bands[i].filterType = .parametric
         }
 
-        engine.connect(playerNode, to: eqNode, format: nil)
-        engine.connect(eqNode, to: engine.mainMixerNode, format: nil)
+        let format = engine.outputNode.outputFormat(forBus: 0)
+        engine.connect(playerNode, to: eqNode, format: format)
+        engine.connect(eqNode, to: engine.mainMixerNode, format: format)
 
         do {
             try engine.start()

@@ -7,20 +7,14 @@
 
 import Foundation
 import SwiftUI
-import ID3TagEditor
 
-struct Song: Identifiable, Equatable {
+struct Song: Identifiable, Hashable {
     var id: Int
     var title: String
     var album: String
     var file: String
-    var songImage: ID3FrameAttachedPicture?
-
-    static func ==(lhs: Song, rhs: Song) -> Bool {
-        return lhs.id == rhs.id
-    }
+    var songImage: AttachedPicture?
 }
-
 
 extension Color {
     init(hex: String) {
