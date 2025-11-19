@@ -1,0 +1,19 @@
+# Build folders
+build/
+Tunes4S.xcodeproj/project.xcworkspace/xcuserdata/
+Tunes4S.xcodeproj/xcuserdata/
+*.xcuserdatad
+
+# macOS
+.DS_Store
+
+# Swift Package Manager
+.build/
+Packages/
+
+# IDEs
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
