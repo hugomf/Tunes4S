@@ -7,7 +7,7 @@ let package = Package(
         .macOS(.v11)
     ],
     products: [
-        .executable(name: "Tunes4S", targets: ["Tunes4S"])
+        .library(name: "Tunes4S", targets: ["Tunes4S"])
     ],
     dependencies: [
         .package(url: "https://github.com/chicio/ID3TagEditor.git", from: "3.2.1")
@@ -15,6 +15,7 @@ let package = Package(
     targets: [
         .target(
             name: "Tunes4S",
-            dependencies: ["ID3TagEditor"])
+            dependencies: ["ID3TagEditor"],
+            path: "Tunes4S")
     ]
 )

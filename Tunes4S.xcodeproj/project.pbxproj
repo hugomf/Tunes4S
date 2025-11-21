@@ -17,6 +17,7 @@
 		9AD76C1D28980D1C00AD547B /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD76C1C28980D1C00AD547B /* Helper.swift */; };
 		9AD76C1F28980E8D00AD547B /* ImportFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD76C1E28980E8D00AD547B /* ImportFolderView.swift */; };
 		9AD76C21289814F900AD547B /* LeftNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD76C20289814F900AD547B /* LeftNavigationView.swift */; };
+		9AD76F252B9809E400D75AFC /* AudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD76F242B9809E400D75AFC /* AudioService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		9AD76C1C28980D1C00AD547B /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		9AD76C1E28980E8D00AD547B /* ImportFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFolderView.swift; sourceTree = "<group>"; };
 		9AD76C20289814F900AD547B /* LeftNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftNavigationView.swift; sourceTree = "<group>"; };
+		9AD76F242B9809E400D75AFC /* AudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 		9AD76C072897811300AD547B /* Tunes4S */ = {
 			isa = PBXGroup;
 			children = (
+				9AD76F242B9809E400D75AFC /* AudioService.swift */,
 				9AD76C082897811300AD547B /* Tunes4SApp.swift */,
 				9AD76C0A2897811300AD547B /* ContentView.swift */,
 				9AD76C0C2897811400AD547B /* Assets.xcassets */,
@@ -162,6 +165,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AD76F252B9809E400D75AFC /* AudioService.swift in Sources */,
 				9AD76C0B2897811300AD547B /* ContentView.swift in Sources */,
 				9AD76C1F28980E8D00AD547B /* ImportFolderView.swift in Sources */,
 				9AD76C1B28980CE700AD547B /* SongListView.swift in Sources */,

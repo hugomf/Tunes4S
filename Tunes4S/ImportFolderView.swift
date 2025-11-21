@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import ID3TagEditor
 
 struct ImportFolderView: View {
     
@@ -57,33 +56,13 @@ struct ImportFolderView: View {
   }
     
     func readMp3(path: String, id: Int) -> Song? {
-        
-        let id3TagEditor = ID3TagEditor()
-        
-        do {
-            if let id3Tag = try id3TagEditor.read(from: path) {
-                let tagContentReader = ID3TagContentReader(id3Tag: id3Tag)
-                
-                
-                let title = tagContentReader.title() ?? ""
-                let album = tagContentReader.album() ?? ""
-                let songImage = tagContentReader.attachedPictures()[0] as? ID3FrameAttachedPicture
-            
-                print(title)
-                //print(tagContentReader.artist() ?? "")
-                
-                return Song(
-                    id: id,
-                    title: title,
-                    album: album,
-                    file: path,
-                    songImage: songImage)
-            }
-        } catch  {
-            print(error)
-        }
-        return nil
-        
+        let song = Song(id: id, title: fileNameFromPath(path), album: "Unknown Album", artist: "Unknown Artist", file: path, songImage: nil)
+        song.duration = 180.0 // Placeholder duration
+        return song
+    }
+
+    func fileNameFromPath(_ path: String) -> String {
+        return (path as NSString).lastPathComponent.replacingOccurrences(of: ".mp3", with: "")
     }
     
     

@@ -58,8 +58,11 @@ struct RowViewer: View {
             //.shadow(radius: 10)
     
             if item.songImage != nil {
-                Image(nsImage: NSImage(data: item.songImage!.picture)!)
+                Image(nsImage: NSImage(data: item.songImage!)!)
                     .resizable()
+                    .frame(width: 30.0, height: 30.0)
+            } else {
+                Image(systemName: "music.note")
                     .frame(width: 30.0, height: 30.0)
             }
 
@@ -87,6 +90,6 @@ struct RowViewer: View {
 
 struct RowViewer_Previews: PreviewProvider {
     static var previews: some View {
-        RowViewer(item: Song(id: 1, title: "Title1", album:"Album1", file:"/Library/Test1/song.mp3"))
+        RowViewer(item: Song(id: 1, title: "Title1", album:"Album1", artist: "Artist1", file:"/Library/Test1/song.mp3"))
     }
 }
