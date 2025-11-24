@@ -25,21 +25,63 @@ struct WinampPlaylist: View {
     var body: some View {
 
         GeometryReader { geometry in
-            ScrollView {
-                VStack(spacing: 0) {
-                    ForEach(songs) { item in
-                        ResponsiveRowViewer(item: item, containerWidth: geometry.size.width)
-                        Divider()
-                            .padding(.all, 2.0)
+            VStack(spacing: 0) {
+                // Playlist Header with Close Button
+                HStack {
+                    Button(action: {
+                        showPlaylist = false
+                    }) {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 12, weight: .bold))
+                            .foregroundColor(Color(hex: "00FF00"))
+                            .frame(width: 20, height: 20)
+                            .background(Color(hex: "333333"))
+                            .clipShape(Circle())
                     }
+                    .buttonStyle(BorderlessButtonStyle())
+
+                    Text("PLAYLIST")
+                        .font(.system(size: 10, weight: .bold))
+                        .foregroundColor(Color(hex: "00FF00"))
+                        .frame(maxWidth: .infinity, alignment: .center)
+
+                    Spacer()
+                        .frame(width: 20) // Balance the close button
                 }
-                .padding(.vertical, 8)
-                .frame(minWidth: geometry.size.width, maxWidth: geometry.size.width)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 6)
+                .background(Color(hex: "1A1A1A"))
+                .overlay(
+                    Rectangle()
+                        .stroke(Color(hex: "333333"), lineWidth: 1)
+                )
+
+                // Song List
+                ScrollView {
+                    VStack(spacing: 0) {
+                        ForEach(songs) { item in
+                            ResponsiveRowViewer(
+                                item: item,
+                                containerWidth: geometry.size.width,
+                                currentSong: currentSong,
+                                onSongSelected: selectSong
+                            )
+                            Divider()
+                                .padding(.all, 2.0)
+                        }
+                    }
+                    .padding(.vertical, 8)
+                    .frame(minWidth: geometry.size.width, maxWidth: geometry.size.width)
+                }
             }
             .background(Color(hex: "2A2A2A"))
         }
     }
 
+    private func selectSong(_ song: Song) {
+        currentSong = song
+        showPlaylist = false // Close playlist when song is selected
+    }
 }
 
 // Responsive Row Viewer that adapts to container width
@@ -47,34 +89,16 @@ struct ResponsiveRowViewer: View {
 
     var item: Song
     var containerWidth: CGFloat
-
-    @State var selectedBtn: Int = 1
-    @State private var isPressed = false
-    @State private var buttonImage = "play.circle.fill"
-    @State private var audioPlayer: AVAudioPlayer!
+    var currentSong: Song?
+    var onSongSelected: (Song) -> Void
 
     var body: some View {
 
         HStack(spacing: 8) {
             Button(action: {
-                isPressed.toggle()
-                if (isPressed) {
-                    self.selectedBtn = item.id
-                    buttonImage = "stop.circle.fill"
-                    print("playing")
-
-                    let url = URL(fileURLWithPath: item.file)
-                    self.audioPlayer = try! AVAudioPlayer(contentsOf: url)
-                    self.audioPlayer.play()
-
-                } else {
-                    self.selectedBtn = -1
-                    print("stopped")
-                    buttonImage = "play.circle.fill"
-                    self.audioPlayer.stop()
-                }
+                onSongSelected(item)
             }) {
-                Image(systemName: self.selectedBtn == item.id ? "stop.circle.fill" : "play.circle.fill")
+                Image(systemName: currentSong?.id == item.id ? "stop.circle.fill" : "play.circle.fill")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20.0, height: 20.0)
@@ -128,7 +152,7 @@ struct ResponsiveRowViewer: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 6)
-        .background(self.selectedBtn == item.id ?
+        .background(currentSong?.id == item.id ?
                     Color(hex: "444444").opacity(0.5) :
                     Color.clear)
     }
@@ -138,13 +162,16 @@ struct ResponsiveRowViewer: View {
 struct WinampPlaylist_Previews: PreviewProvider {
 
     @State static var songs:[Song] = [
-        Song(id: 1, title: "title1", album: "album1", artist: "artist1", file: "/Home/hugomf/Music/Song1.mp3"),
-        Song(id: 2, title: "title2", album: "album1", artist: "artist2", file: "/Home/hugomf/Music/Song2.mp3"),
-        Song(id: 3, title: "title3", album: "album1", artist: "artist3", file: "/Home/hugomf/Music/Song3.mp3")
+        Song(id: 1, title: "title1", album: "album1", artist: "artist1", file: "/Home/hugomf/Music/Song1.mp3", songImage: nil),
+        Song(id: 2, title: "title2", album: "album1", artist: "artist2", file: "/Home/hugomf/Music/Song2.mp3", songImage: nil),
+        Song(id: 3, title: "title3", album: "album1", artist: "artist3", file: "/Home/hugomf/Music/Song3.mp3", songImage: nil)
     ]
 
     static var previews: some View {
-        WinampPlaylist(songs: $songs, currentSong: .constant(nil), showPlaylist: .constant(false), isPlaying: .constant(false), onReadMp3: {}, onAudioStop: {})
+        GeometryReader { geometry in
+            WinampPlaylist(songs: $songs, currentSong: .constant(nil), showPlaylist: .constant(true), isPlaying: .constant(false), onReadMp3: {}, onAudioStop: {})
+                .frame(width: 300, height: 400)
+        }
     }
 }
 #endif

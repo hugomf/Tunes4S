@@ -19,9 +19,11 @@ public class AudioService: ObservableObject {
     private var savedGains: [Float] = [Float](repeating: 0.0, count: 10) // Store EQ gains persistently
     private var currentSong: Song?
     private var currentFile: AVAudioFile?
+    private var currentFileURL: URL?  // Store URL for seeking
     private var playbackStartTime: Date?
     private var progressUpdateTimer: Timer?
     private var currentVolume: Float = 0.8 // Store current volume
+    private var currentBalance: Float = 0.0 // Store current balance
     private var currentPosition: Double = 0.0 // Track actual current position for seeking
 
     // FFT Analysis - Simple spectrum using audio buffer magnitude
@@ -31,8 +33,23 @@ public class AudioService: ObservableObject {
     // Published progress values
     @Published public var currentTime: Double = 0.0
     @Published public var duration: Double = 1.0
-    @Published public var isPlaying: Bool = false
+    @Published public var isPlaying: Bool = false {
+        didSet {
+            print("🔄 isPlaying changed from \(oldValue) to \(isPlaying)")
+        }
+    }
     @Published public var spectrumData: [Float] = Array(repeating: 0, count: 20)
+    @Published public var volume: Float = 0.8 {
+        didSet {
+            setVolume(volume)
+        }
+    }
+    @Published public var balance: Float = 0.0 {
+        didSet {
+            setBalance(balance)
+        }
+    }
+    @Published public var isStereo: Bool = true
 
     init() {
         setupFFT()
@@ -83,6 +100,7 @@ public class AudioService: ObservableObject {
 
         do {
             let fileURL = URL(fileURLWithPath: song.file)
+            currentFileURL = fileURL  // Store for seeking
             currentFile = try AVAudioFile(forReading: fileURL)
 
             // Set duration
@@ -101,13 +119,19 @@ public class AudioService: ObservableObject {
             // Start spectrum analysis
             startSpectrumAnalysis()
 
-            // Schedule the buffer for playback
-            playerNode.scheduleFile(currentFile!, at: nil, completionHandler: { [weak self] in
-                // When playback completes
-                DispatchQueue.main.async {
-                    self?.stop()
+            // Schedule the full file for playback using scheduleSegment (consistent with seek)
+            playerNode.scheduleSegment(
+                currentFile!,
+                startingFrame: 0,
+                frameCount: AVAudioFrameCount(currentFile!.length),
+                at: nil,
+                completionHandler: { [weak self] in
+                    // ✅ COMPLETION HANDLER NEUTRALIZATION - don't touch app state!
+                    DispatchQueue.main.async {
+                        print("🎵 segment finished - state untouched")
+                    }
                 }
-            })
+            )
 
             playerNode.play()
         } catch {
@@ -118,21 +142,23 @@ public class AudioService: ObservableObject {
 
     public func stop() {
         isPlaying = false
-        currentSong = nil
-        currentFile = nil
+        // DON'T set currentSong = nil - keep it for seeking!
+        // currentSong = nil  // ← REMOVE THIS LINE
         playbackStartTime = nil
 
-        // Stop progress tracking
         progressUpdateTimer?.invalidate()
         progressUpdateTimer = nil
 
-        // Stop spectrum analysis
-        stopSpectrumAnalysis()
+        // ✅ ONLY REMOVE TAP DURING TRUE APP STOP (don't kill spectrum during seeks)
+        // if engine.mainMixerNode.numberOfInputs > 0 {
+        //     stopSpectrumAnalysis()
+        // }
 
         playerNode.stop()
+        playerNode.reset()
 
-        // Reset progress and spectrum
         currentTime = 0.0
+        currentPosition = 0.0
         spectrumData = Array(repeating: 0, count: 20)
     }
 
@@ -142,58 +168,98 @@ public class AudioService: ObservableObject {
         // Reset playback start time for current segment
         playbackStartTime = Date()
 
+        // ✅ REMOVE the isPlaying check - if timer is running, track progress
         progressUpdateTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
-            guard let self = self, self.isPlaying, let startTime = self.playbackStartTime else { return }
+            guard let self = self, let startTime = self.playbackStartTime else { return }
 
             let elapsedInSegment = Date().timeIntervalSince(startTime)
             self.currentTime = min(self.currentPosition + elapsedInSegment, self.duration)
         }
     }
 
+    // ✅ TIMER RACE FIX: Async timer restart prevents race conditions
+    private func restartProgressTracking() {
+        progressUpdateTimer?.invalidate()
+        progressUpdateTimer = nil
+        DispatchQueue.main.async { [weak self] in
+            self?.startProgressTracking()
+        }
+    }
+
     public func seek(to time: Double) {
-        guard let file = currentFile else {
+        guard let fileURL = currentFileURL else {
             print("Cannot seek: no file loaded")
             return
         }
 
-        // Clamp time to valid range
         let clampedTime = max(0, min(time, duration))
+        print("🔍 Seeking to \(clampedTime)s")
 
-        print("Seeking to \(clampedTime) seconds (duration: \(duration))")
-
-        // Stop current playback and progress tracking
+        // Stop playback but DON'T call stop() - just pause the player
         playerNode.stop()
-        progressUpdateTimer?.invalidate()
+        playerNode.reset()
 
-        // Update position variables
+        // Stop timer temporarily
+        progressUpdateTimer?.invalidate()
+        progressUpdateTimer = nil
+
+        // Update position
         currentPosition = clampedTime
         currentTime = clampedTime
 
-        // If we were playing, restart playback from new position
-        if isPlaying {
+        // ✅ CHANGED: Always restart playback if we have a file, not just if wasPlaying
+        do {
+            // Re-open the file fresh
+            let file = try AVAudioFile(forReading: fileURL)
+            currentFile = file
+
             let sampleRate = file.processingFormat.sampleRate
             let seekSample = AVAudioFramePosition(clampedTime * sampleRate)
-            let totalSamples = AVAudioFrameCount(file.length)
-            let remainingSamples = totalSamples - AVAudioFrameCount(seekSample)
+            let remainingSamples = AVAudioFrameCount(file.length) - AVAudioFrameCount(seekSample)
 
-            // Restore volume and EQ gains before restarting playback
+            guard remainingSamples > 0 else {
+                print("❌ Cannot seek beyond end")
+                stop()
+                return
+            }
+
+            print("📍 Scheduling from frame \(seekSample), remaining: \(remainingSamples)")
+
+            // Restore audio settings
             engine.mainMixerNode.outputVolume = currentVolume
+            playerNode.pan = currentBalance
             restoreEQGains()
 
-            // Schedule segment starting from seek position
-            playerNode.scheduleSegment(file, startingFrame: seekSample, frameCount: remainingSamples, at: nil, completionHandler: { [weak self] in
-                // When the segment finishes (end of song)
-                DispatchQueue.main.async {
-                    self?.stop()
+            // Schedule segment
+            playerNode.scheduleSegment(
+                file,
+                startingFrame: seekSample,
+                frameCount: remainingSamples,
+                at: nil,
+                completionHandler: { [weak self] in
+                    // ✅ COMPLETION HANDLER NEUTRALIZATION - don't touch app state!
+                    DispatchQueue.main.async {
+                        print("🎵 segment finished - state untouched")
+                    }
                 }
-            })
+            )
 
-            // Start playing from seek position
+            // Start playing
             playerNode.play()
 
-            // Reset playback start time and restart progress tracking
+            // Set isPlaying to true
+            isPlaying = true
+            print("🟢 isPlaying set to TRUE - value is now: \(isPlaying)")
+
+            // Restart tracking
             playbackStartTime = Date()
-            startProgressTracking()
+            restartProgressTracking()  // ✅ USE ASYNC TIMER RESTART
+
+            print("✅ Seek complete - playing from \(clampedTime)s")
+
+        } catch {
+            print("❌ Error seeking: \(error)")
+            stop()
         }
     }
 
@@ -227,6 +293,14 @@ public class AudioService: ObservableObject {
         print("Volume set to \(volume)")
     }
 
+    public func setBalance(_ balance: Float) {
+        currentBalance = balance
+
+        // Pan the player node directly - this affects the stereo signal before EQ/mixing
+        playerNode.pan = currentBalance
+        print("Balance set to \(String(format: "%.2f", currentBalance))")
+    }
+
     // MARK: - Spectrum Analysis (Simplified audio energy-based approach)
 
     private func setupFFT() {
@@ -236,9 +310,13 @@ public class AudioService: ObservableObject {
     private func startSpectrumAnalysis() {
         let format = engine.outputNode.outputFormat(forBus: 0)
 
+        // ✅ Remove existing tap if present
+        engine.mainMixerNode.removeTap(onBus: 0)
+
         // Install tap on the main mixer node to capture audio for analysis
         engine.mainMixerNode.installTap(onBus: 0, bufferSize: 1024, format: format) { [weak self] (buffer, _) in
-            guard let self = self, self.isPlaying else { return }
+            // ✅ REMOVE the isPlaying guard - analyze audio whenever it flows
+            guard let self = self else { return }
             self.analyzeAudio(buffer: buffer)
         }
     }
@@ -248,6 +326,7 @@ public class AudioService: ObservableObject {
     }
 
     private func analyzeAudio(buffer: AVAudioPCMBuffer) {
+        // ✅ REMOVE this print spam and the isPlaying check
         guard let pcmBuffer = buffer.floatChannelData else { return }
 
         // Simple spectrum analysis: divide the buffer into chunks and calculate energy

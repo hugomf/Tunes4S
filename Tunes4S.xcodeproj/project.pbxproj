@@ -7,21 +7,51 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9A981E47289CE22C00D79AFC /* RowViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A981E46289CE22C00D79AFC /* RowViewer.swift */; };
+		18BBD339037A3CE01521D387 /* WinampToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F80342B45657F02166077CB /* WinampToggleButton.swift */; };
+		1C4F8A397DF53B0F53A73616 /* WinampTimeDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D20332F781EFBF011359F /* WinampTimeDisplay.swift */; };
+		1FB0BE4454062233CE4EBE59 /* WinampDisplaySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECB5AB0BD533FD7BAA78324 /* WinampDisplaySection.swift */; };
+		20A0442F3EC598BBB5A4775C /* WinampTitleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E2D7EA7C47628E461B366 /* WinampTitleBar.swift */; };
+		2437E30275032F6DE8D87A2A /* EqualizerPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F79C849F16CC58B52037736 /* EqualizerPreset.swift */; };
+		29B521CCF93A9B272B4C6D03 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84464B32F81B9584A97D487F /* Song.swift */; };
+		2A6F36D832B67E1FB3BB2732 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047AD0676B59330C2AD1A3E3 /* Components.swift */; };
+		4E397655BC26B2639E35F273 /* WinampProgressSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD996386EB15C4DBCF6E87A8 /* WinampProgressSection.swift */; };
+		53A1E8A31F355E84EA3415C1 /* WinampEqualizerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9ACA5C8E96E906403A911FA /* WinampEqualizerSection.swift */; };
+		609E08C000E94C532EE7B6AC /* SpectrumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37DE057037D34D093BF52B0 /* SpectrumViewModel.swift */; };
+		656113D2693136FE7FCD4DA4 /* WinampBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC454D7BDBBE5DDD4A8AA004 /* WinampBackground.swift */; };
+		6DF1CAB67D2FCF754811B724 /* WinampVolumeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F5EE51D7039E9CBBF718CB /* WinampVolumeControl.swift */; };
+		8E378274C1FD8675B60010C2 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8811DADF224D06F8AAA08 /* PlayerViewModel.swift */; };
 		9AD76C092897811300AD547B /* Tunes4SApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD76C082897811300AD547B /* Tunes4SApp.swift */; };
 		9AD76C0B2897811300AD547B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD76C0A2897811300AD547B /* ContentView.swift */; };
 		9AD76C0D2897811400AD547B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AD76C0C2897811400AD547B /* Assets.xcassets */; };
 		9AD76C102897811400AD547B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AD76C0F2897811400AD547B /* Preview Assets.xcassets */; };
 		9AD76C192897941700AD547B /* ID3TagEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 9AD76C182897941700AD547B /* ID3TagEditor */; };
 		9AD76C1B28980CE700AD547B /* SongListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD76C1A28980CE700AD547B /* SongListView.swift */; };
-		9AD76C1D28980D1C00AD547B /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD76C1C28980D1C00AD547B /* Helper.swift */; };
 		9AD76C1F28980E8D00AD547B /* ImportFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD76C1E28980E8D00AD547B /* ImportFolderView.swift */; };
 		9AD76C21289814F900AD547B /* LeftNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD76C20289814F900AD547B /* LeftNavigationView.swift */; };
 		9AD76F252B9809E400D75AFC /* AudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD76F242B9809E400D75AFC /* AudioService.swift */; };
+		B4C48581A1CE484B60DC491D /* WinampLEDText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3817959FEEA3BA1E7EA0FF77 /* WinampLEDText.swift */; };
+		B9FA49C18112D43617079480 /* ScrollingText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F7A99F790DD4901AB0E35E /* ScrollingText.swift */; };
+		C17C18017F977AF3FC5535F5 /* EqualizerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CD5EFADCAC7A1ECD6278CC /* EqualizerViewModel.swift */; };
+		CD3051C6B3C48D2D564768BB /* WinampControlPanelSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2556328D50EBD36B62D594BA /* WinampControlPanelSection.swift */; };
+		CF0432A7DB3440BBB79D781C /* WinampButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFF2319AEEF985AC25A34FA /* WinampButton.swift */; };
+		EBC7DF74FDC679604D1FE136 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305E6386DBF291B463AD37FE /* Color+Hex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9A981E46289CE22C00D79AFC /* RowViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowViewer.swift; sourceTree = "<group>"; };
+		047AD0676B59330C2AD1A3E3 /* Components.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Components.swift; path = Tunes4S/Components.swift; sourceTree = "<group>"; };
+		0BB8811DADF224D06F8AAA08 /* PlayerViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlayerViewModel.swift; path = Tunes4S/Models/PlayerViewModel.swift; sourceTree = "<group>"; };
+		2556328D50EBD36B62D594BA /* WinampControlPanelSection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WinampControlPanelSection.swift; path = Tunes4S/Views/Sections/WinampControlPanelSection.swift; sourceTree = "<group>"; };
+		25F7A99F790DD4901AB0E35E /* ScrollingText.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScrollingText.swift; path = Tunes4S/Views/Components/ScrollingText.swift; sourceTree = "<group>"; };
+		305E6386DBF291B463AD37FE /* Color+Hex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Color+Hex.swift"; path = "Tunes4S/Extensions/Color+Hex.swift"; sourceTree = "<group>"; };
+		314E2D7EA7C47628E461B366 /* WinampTitleBar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WinampTitleBar.swift; path = Tunes4S/Views/Sections/WinampTitleBar.swift; sourceTree = "<group>"; };
+		36F5EE51D7039E9CBBF718CB /* WinampVolumeControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WinampVolumeControl.swift; path = Tunes4S/Views/Components/WinampVolumeControl.swift; sourceTree = "<group>"; };
+		3817959FEEA3BA1E7EA0FF77 /* WinampLEDText.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WinampLEDText.swift; path = Tunes4S/Views/Components/WinampLEDText.swift; sourceTree = "<group>"; };
+		3A8D20332F781EFBF011359F /* WinampTimeDisplay.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WinampTimeDisplay.swift; path = Tunes4S/Views/Components/WinampTimeDisplay.swift; sourceTree = "<group>"; };
+		4F79C849F16CC58B52037736 /* EqualizerPreset.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EqualizerPreset.swift; path = Tunes4S/Models/EqualizerPreset.swift; sourceTree = "<group>"; };
+		5F80342B45657F02166077CB /* WinampToggleButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WinampToggleButton.swift; path = Tunes4S/Views/Components/WinampToggleButton.swift; sourceTree = "<group>"; };
+		77CD5EFADCAC7A1ECD6278CC /* EqualizerViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EqualizerViewModel.swift; path = Tunes4S/Models/EqualizerViewModel.swift; sourceTree = "<group>"; };
+		84464B32F81B9584A97D487F /* Song.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Song.swift; path = Tunes4S/Models/Song.swift; sourceTree = "<group>"; };
+		8DFF2319AEEF985AC25A34FA /* WinampButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WinampButton.swift; path = Tunes4S/Views/Components/WinampButton.swift; sourceTree = "<group>"; };
 		9AD76C052897811300AD547B /* Tunes4S.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tunes4S.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AD76C082897811300AD547B /* Tunes4SApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tunes4SApp.swift; sourceTree = "<group>"; };
 		9AD76C0A2897811300AD547B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -29,10 +59,14 @@
 		9AD76C0F2897811400AD547B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9AD76C112897811400AD547B /* Tunes4S.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tunes4S.entitlements; sourceTree = "<group>"; };
 		9AD76C1A28980CE700AD547B /* SongListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongListView.swift; sourceTree = "<group>"; };
-		9AD76C1C28980D1C00AD547B /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		9AD76C1E28980E8D00AD547B /* ImportFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFolderView.swift; sourceTree = "<group>"; };
 		9AD76C20289814F900AD547B /* LeftNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftNavigationView.swift; sourceTree = "<group>"; };
 		9AD76F242B9809E400D75AFC /* AudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioService.swift; sourceTree = "<group>"; };
+		AC454D7BDBBE5DDD4A8AA004 /* WinampBackground.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WinampBackground.swift; path = Tunes4S/Views/Components/WinampBackground.swift; sourceTree = "<group>"; };
+		B9ACA5C8E96E906403A911FA /* WinampEqualizerSection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WinampEqualizerSection.swift; path = Tunes4S/Views/Sections/WinampEqualizerSection.swift; sourceTree = "<group>"; };
+		CD996386EB15C4DBCF6E87A8 /* WinampProgressSection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WinampProgressSection.swift; path = Tunes4S/Views/Sections/WinampProgressSection.swift; sourceTree = "<group>"; };
+		D37DE057037D34D093BF52B0 /* SpectrumViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SpectrumViewModel.swift; path = Tunes4S/Models/SpectrumViewModel.swift; sourceTree = "<group>"; };
+		EECB5AB0BD533FD7BAA78324 /* WinampDisplaySection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WinampDisplaySection.swift; path = Tunes4S/Views/Sections/WinampDisplaySection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +86,25 @@
 			children = (
 				9AD76C072897811300AD547B /* Tunes4S */,
 				9AD76C062897811300AD547B /* Products */,
+				84464B32F81B9584A97D487F /* Song.swift */,
+				D37DE057037D34D093BF52B0 /* SpectrumViewModel.swift */,
+				4F79C849F16CC58B52037736 /* EqualizerPreset.swift */,
+				305E6386DBF291B463AD37FE /* Color+Hex.swift */,
+				AC454D7BDBBE5DDD4A8AA004 /* WinampBackground.swift */,
+				8DFF2319AEEF985AC25A34FA /* WinampButton.swift */,
+				5F80342B45657F02166077CB /* WinampToggleButton.swift */,
+				3A8D20332F781EFBF011359F /* WinampTimeDisplay.swift */,
+				25F7A99F790DD4901AB0E35E /* ScrollingText.swift */,
+				3817959FEEA3BA1E7EA0FF77 /* WinampLEDText.swift */,
+				314E2D7EA7C47628E461B366 /* WinampTitleBar.swift */,
+				047AD0676B59330C2AD1A3E3 /* Components.swift */,
+				0BB8811DADF224D06F8AAA08 /* PlayerViewModel.swift */,
+				77CD5EFADCAC7A1ECD6278CC /* EqualizerViewModel.swift */,
+				EECB5AB0BD533FD7BAA78324 /* WinampDisplaySection.swift */,
+				CD996386EB15C4DBCF6E87A8 /* WinampProgressSection.swift */,
+				2556328D50EBD36B62D594BA /* WinampControlPanelSection.swift */,
+				B9ACA5C8E96E906403A911FA /* WinampEqualizerSection.swift */,
+				36F5EE51D7039E9CBBF718CB /* WinampVolumeControl.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,10 +126,8 @@
 				9AD76C112897811400AD547B /* Tunes4S.entitlements */,
 				9AD76C0E2897811400AD547B /* Preview Content */,
 				9AD76C1A28980CE700AD547B /* SongListView.swift */,
-				9AD76C1C28980D1C00AD547B /* Helper.swift */,
 				9AD76C1E28980E8D00AD547B /* ImportFolderView.swift */,
 				9AD76C20289814F900AD547B /* LeftNavigationView.swift */,
-				9A981E46289CE22C00D79AFC /* RowViewer.swift */,
 			);
 			path = Tunes4S;
 			sourceTree = "<group>";
@@ -171,8 +222,25 @@
 				9AD76C1B28980CE700AD547B /* SongListView.swift in Sources */,
 				9AD76C092897811300AD547B /* Tunes4SApp.swift in Sources */,
 				9AD76C21289814F900AD547B /* LeftNavigationView.swift in Sources */,
-				9AD76C1D28980D1C00AD547B /* Helper.swift in Sources */,
-				9A981E47289CE22C00D79AFC /* RowViewer.swift in Sources */,
+				29B521CCF93A9B272B4C6D03 /* Song.swift in Sources */,
+				609E08C000E94C532EE7B6AC /* SpectrumViewModel.swift in Sources */,
+				2437E30275032F6DE8D87A2A /* EqualizerPreset.swift in Sources */,
+				EBC7DF74FDC679604D1FE136 /* Color+Hex.swift in Sources */,
+				656113D2693136FE7FCD4DA4 /* WinampBackground.swift in Sources */,
+				CF0432A7DB3440BBB79D781C /* WinampButton.swift in Sources */,
+				18BBD339037A3CE01521D387 /* WinampToggleButton.swift in Sources */,
+				1C4F8A397DF53B0F53A73616 /* WinampTimeDisplay.swift in Sources */,
+				B9FA49C18112D43617079480 /* ScrollingText.swift in Sources */,
+				B4C48581A1CE484B60DC491D /* WinampLEDText.swift in Sources */,
+				20A0442F3EC598BBB5A4775C /* WinampTitleBar.swift in Sources */,
+				2A6F36D832B67E1FB3BB2732 /* Components.swift in Sources */,
+				8E378274C1FD8675B60010C2 /* PlayerViewModel.swift in Sources */,
+				C17C18017F977AF3FC5535F5 /* EqualizerViewModel.swift in Sources */,
+				1FB0BE4454062233CE4EBE59 /* WinampDisplaySection.swift in Sources */,
+				4E397655BC26B2639E35F273 /* WinampProgressSection.swift in Sources */,
+				CD3051C6B3C48D2D564768BB /* WinampControlPanelSection.swift in Sources */,
+				53A1E8A31F355E84EA3415C1 /* WinampEqualizerSection.swift in Sources */,
+				6DF1CAB67D2FCF754811B724 /* WinampVolumeControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
